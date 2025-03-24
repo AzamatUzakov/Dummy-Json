@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/card"
 import { Button } from "../ui/button";
 import ProductDetails from "./ProductDetails";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 
 const ProductList = () => {
@@ -27,8 +28,10 @@ const ProductList = () => {
         fetch(import.meta.env.VITE_PUBLICK_API)
             .then((res) => res.json())
             .then((data) => {
-                setProducts(data.products)
-                setFiltered(data.products)
+                const randomProduct = data.products.sort(() => Math.random() - 0.5);
+
+                setProducts(randomProduct)
+                setFiltered(randomProduct)
             })
             .catch((e) => console.error("Error:", e));
     }
@@ -40,10 +43,10 @@ const ProductList = () => {
 
     return (
         <div className="relative">
-            <Button className="absolute top-0 right-5" onClick={() => fetchData()}>Reload</Button>
+            <Button className="absolute top-0 right-5 cursor-pointer" onClick={() => fetchData()}>Обновить товары</Button>
             <h1 className="text-2xl font-bold my-4">Список товаров:</h1>
             <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-                {filtered.length > 0 ?(
+                {filtered.length > 0 ? (
                     filtered.map((item) => (
                         <Card key={item.id} className="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300 cursor-pointer"
                             onClick={() => { setSelectedProduct(item), setModal(true) }}
@@ -62,11 +65,26 @@ const ProductList = () => {
                             </Button>
                         </Card>
                     ))
-                ) : <Skeleton className="w-[100px] h-[20px] rounded-full" />
-}
+                ) :
+
+                    (
+                        <div className="flex  w-full gap-3">
+                            {[...Array(5)].map((_, index) => (
+                                <div key={index}>
+                                    <div className="flex flex-col space-y-3">
+                                        <Skeleton className="h-[125px] w-[230px] rounded-xl" />
+                                        <div className="space-y-2">
+                                            <Skeleton className="h-4 w-[180px]" />
+                                            <Skeleton className="h-4 w-[190px]" />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 {modal && <ProductDetails setModal={setModal} />}
-            </main>
-        </div>
+            </main >
+        </div >
     );
 };
 
