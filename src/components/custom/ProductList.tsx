@@ -1,18 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "../ui/button";
+import ProductDetails from "./ProductDetails";
 
 
 const ProductList = () => {
     const context = useContext(ProductContext);
+    const [modal, setModal] = useState(false)
 
     if (!context) {
         throw new Error("ProductList must be used within a ProductProvider");
@@ -34,7 +35,9 @@ const ProductList = () => {
             <h1 className="text-2xl font-bold my-4">Список товаров:</h1>
             <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 {products.map((item) => (
-                    <Card key={item.id} className="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300 cursor-pointer">
+                    <Card key={item.id} className="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300 cursor-pointer"
+                        onClick={() => setModal(true)}
+                    >
                         <CardHeader className="p-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white">
                             <CardTitle className="text-2xl font-semibold mb-2">{item.title}</CardTitle>
                             <CardDescription className="text-sm text-white  opacity-80">{item.description}</CardDescription>
@@ -43,12 +46,13 @@ const ProductList = () => {
                             <img src={item.images?.[0]} alt="images" className="h-[200px] w-full object-cover rounded-lg mb-4" />
                         </CardContent>
                         <Button className="w-[80%] mx-auto cursor-pointer my-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg shadow-md transition duration-300"
-                        onClick={()=>setSelectedProduct(item)}
+                            onClick={() => { setSelectedProduct(item), setModal(true) }}
                         >
-                            BUY {item.price} $   
+                            BUY {item.price} $
                         </Button>
                     </Card>
                 ))}
+                {modal && <ProductDetails setModal={setModal}/>}
             </main>
         </div>
     );

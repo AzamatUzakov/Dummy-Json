@@ -9,7 +9,6 @@ function App() {
     <ProductProvider>
       <Search />
       <ProductList />
-      <ProductDetails />
     </ProductProvider>
   );
 }
