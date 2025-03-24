@@ -36,7 +36,7 @@ const ProductList = () => {
             <main className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 {products.map((item) => (
                     <Card key={item.id} className="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300 cursor-pointer"
-                        onClick={() => setModal(true)}
+                        onClick={() => { setSelectedProduct(item), setModal(true) }}
                     >
                         <CardHeader className="p-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white">
                             <CardTitle className="text-2xl font-semibold mb-2">{item.title}</CardTitle>

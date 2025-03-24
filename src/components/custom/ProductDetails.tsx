@@ -11,7 +11,6 @@ interface ProductDetailsProps {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ setModal }) => {
 
-console.log(setModal);
 
     const context = useContext(ProductContext);
 
@@ -21,7 +20,7 @@ console.log(setModal);
 
     const { selectedProduct } = context;
 
-    console.log();
+    console.log(selectedProduct);
 
     return (
         <>
@@ -30,8 +29,10 @@ console.log(setModal);
 
                     <Card className="h-[250px] w-[80%] mx-auto mb-7 relative">
                         <button className="absolute top-1.5 right-3 cursor-pointer font-bold text-2xl" onClick={() => setModal(false)}>&times;</button>
-                        {/*                     <img src={selectedProduct?.images} alt="img" />
- */}                </Card>
+                      {<img src={selectedProduct?.images?.[0]} className="w-[100px]" alt="img" />}
+                     
+                        <h1 className="text-bla">{ selectedProduct?.title}</h1>
+                    </Card>
 
                 </div>
 
