@@ -27,10 +27,11 @@ export const ProductContext = createContext<ProductContextType | undefined>(
 export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
   const [products, setProducts] = useState<Products[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+  const [filtered, setFiltered] = useState<Products[]>([]);
 
   return (
     <ProductContext.Provider
-      value={{ products, setProducts, selectedProduct, setSelectedProduct }}>
+      value={{ products, setProducts, selectedProduct, setSelectedProduct, filtered, setFiltered }}>
       {children}
     </ProductContext.Provider>
   );
