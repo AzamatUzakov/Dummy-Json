@@ -4,7 +4,7 @@ interface Products {
   id?: number;
   title?: string;
   description?: string;
-  images?: string[];
+  images: string[] | undefined;
   price?: number;
   rating?: number;
 }
@@ -24,7 +24,7 @@ export const ProductContext = createContext<ProductContextType | undefined>(
   undefined
 );
 
-export const ProductProvider: React.FC<ProductProviderProps> = ({children}) => {
+export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
   const [products, setProducts] = useState<Products[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
 
