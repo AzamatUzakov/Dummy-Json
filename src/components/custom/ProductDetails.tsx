@@ -1,6 +1,6 @@
+import React from "react";
 import { ProductContext } from "@/context/ProductContext";
-import React, { useContext } from "react";
-
+import { useContext } from "react";
 interface ProductDetailsProps {
 
     setModal: (value: boolean) => void

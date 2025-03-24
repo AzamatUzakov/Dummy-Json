@@ -12,6 +12,8 @@ interface Products {
 interface ProductContextType {
   products: Products[];
   setProducts: React.Dispatch<React.SetStateAction<Products[]>>;
+  filtered: Products[];
+  setFiltered: React.Dispatch<React.SetStateAction<Products[]>>;
   selectedProduct: Products | null;
   setSelectedProduct: React.Dispatch<React.SetStateAction<Products | null>>;
 }

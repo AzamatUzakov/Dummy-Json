@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = () => {
     if (!context) {
         throw new Error("ProductList must be used within a ProductProvider");
     }
-    const { products, filtered, setFiltered } = context;
+    const { products, setFiltered } = context;
 
 
     const [search, setSearch] = useState<string>("");

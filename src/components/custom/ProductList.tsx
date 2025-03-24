@@ -21,7 +21,7 @@ const ProductList = () => {
         throw new Error("ProductList must be used within a ProductProvider");
     }
 
-    const { products, setProducts, setSelectedProduct, filtered, setFiltered } = context;
+    const { setProducts, setSelectedProduct, filtered, setFiltered } = context;
 
     const fetchData = () => {
 
